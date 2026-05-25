@@ -1,4 +1,5 @@
 console.log("🔥 SERVER FILE LOADED");
+ // test webhook trigger
 console.log("🔥 WEBHOOK HIT");
 const express = require("express");
 
@@ -30,6 +31,7 @@ app.post("/webhook/github", (req, res) => {
   events.push(event);
 
   console.log(event);
+
 
   res.sendStatus(200);
 });
