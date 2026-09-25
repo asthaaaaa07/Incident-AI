@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Incident-AI</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-left">
+      <h1>Incident-AI</h1>
+      <p class="subtitle">Repository Event Monitoring &amp; Incident Intelligence</p>
+    </div>
+    <div class="topbar-right">
+      <div class="status-line">
+        <span class="status-dot" id="serverStatusDot"></span>
+        <span id="serverStatusText">Checking server…</span>
+      </div>
+      <div class="status-line">
+        <span class="status-dot" id="dbStatusDot"></span>
+        <span id="dbStatusText">Checking database…</span>
+      </div>
+      <div class="status-line muted" id="lastUpdated">Last updated: —</div>
+      <button id="refreshBtn" class="btn btn-ghost">Refresh</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Summary cards -->
+    <section class="summary-grid" id="summaryGrid" aria-label="Summary metrics">
+      <div class="summary-card">
+        <span class="summary-value" id="statTotalEvents">—</span>
+        <span class="summary-label">Total events</span>
+      </div>
+      <div class="summary-card">
+        <span class="summary-value" id="statOpen">—</span>
+        <span class="summary-label">Open incidents</span>
+      </div>
+      <div class="summary-card">
+        <span class="summary-value" id="statInvestigating">—</span>
+        <span class="summary-label">Investigating</span>
+      </div>
+      <div class="summary-card">
+        <span class="summary-value" id="statResolved">—</span>
+        <span class="summary-label">Resolved</span>
+      </div>
+      <div class="summary-card summary-card-alert">
+        <span class="summary-value" id="statHighSeverity">—</span>
+        <span class="summary-label">High severity (open)</span>
+      </div>
+    </section>
+
+    <div class="columns">
+      <!-- Event timeline -->
+      <section class="panel" aria-label="Event timeline">
+        <div class="panel-header">
+          <h2>Event timeline</h2>
+        </div>
+        <div class="filter-row">
+          <input type="text" id="filterEventRepo" placeholder="Repository" class="filter-input" />
+          <select id="filterEventType" class="filter-input">
+            <option value="">All event types</option>
+            <option value="push">push</option>
+          </select>
+          <input type="text" id="filterEventBranch" placeholder="Branch" class="filter-input" />
+        </div>
+        <div id="eventList" class="scroll-list" aria-live="polite">
+          <p class="loading-text">Loading events…</p>
+        </div>
+      </section>
+
+      <!-- Incidents -->
+      <section class="panel" aria-label="Incidents">
+        <div class="panel-header">
+          <h2>Incidents</h2>
+        </div>
+        <div class="filter-row">
+          <select id="filterIncidentSeverity" class="filter-input">
+            <option value="">All severities</option>
+            <option value="low">low</option>
+            <option value="medium">medium</option>
+            <option value="high">high</option>
+          </select>
+          <select id="filterIncidentStatus" class="filter-input">
+            <option value="">All statuses</option>
+            <option value="open">open</option>
+            <option value="investigating">investigating</option>
+            <option value="resolved">resolved</option>
+            <option value="ignored">ignored</option>
+          </select>
+        </div>
+        <div id="incidentList" class="scroll-list" aria-live="polite">
+          <p class="loading-text">Loading incidents…</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Incident detail modal -->
+  <div id="incidentModal" class="modal-backdrop hidden">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" id="modalCloseBtn" aria-label="Close">&times;</button>
+      <div id="modalBody"><p class="loading-text">Loading…</p></div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Incident-AI — rule-based detection, no black-box scoring. Built for local development.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

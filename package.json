@@ -1,0 +1,22 @@
+{
+  "name": "incident-ai",
+  "version": "1.0.0",
+  "description": "Incident-AI: GitHub webhook event monitoring and rule-based incident detection.",
+  "main": "servers.js",
+  "scripts": {
+    "start": "node servers.js",
+    "dev": "node --watch servers.js",
+    "db:setup": "node scripts/setupDb.js",
+    "test": "node scripts/test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "pg": "^8.13.1"
+  }
+}
