@@ -1,4 +1,5 @@
 # Incident-AI
+React frontend webhook integration test.
 
 Repository event monitoring and transparent, rule-based incident intelligence — built on GitHub webhooks, Express, and PostgreSQL.
 
