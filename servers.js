@@ -30,7 +30,17 @@ app.use(
 );
 
 // Serve the frontend dashboard.
-app.use(express.static(path.join(__dirname, "public")));
+// If the React app has been built (client-dist/ exists, produced by
+// `npm run build` inside client/), serve that. Otherwise fall back to the
+// original plain HTML/CSS/JS dashboard in public/ so nothing breaks for
+// anyone who hasn't set up the React frontend.
+const fs = require("fs");
+const reactBuildPath = path.join(__dirname, "client-dist");
+const staticRoot = fs.existsSync(reactBuildPath)
+  ? reactBuildPath
+  : path.join(__dirname, "public");
+app.use(express.static(staticRoot));
+console.log(`🖥️  Serving frontend from: ${staticRoot}`);
 
 // --- Health ---
 app.get("/", (req, res) => {
